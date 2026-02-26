@@ -397,11 +397,159 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* FAQ */
+    #faq { background: var(--light); }
+    .faq-list { margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; max-width: 800px; }
+    .faq-item {
+      background: var(--white);
+      border-radius: 0.75rem;
+      border: 1px solid #e8ecf2;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: var(--accent); }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 0.95rem;
+      gap: 1rem;
+    }
+    .faq-question:hover { color: var(--accent); }
+    .faq-arrow {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.2s;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.5rem 1.25rem; }
+
+    /* INSCRIPCION FORM */
+    #inscripcion { background: var(--white); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+    .form-desc p { color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .form-steps { display: flex; flex-direction: column; gap: 1rem; }
+    .form-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-num {
+      width: 32px; height: 32px;
+      background: var(--navy);
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .form-step p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; padding-top: 0.35rem; }
+    .inscripcion-form {
+      background: var(--light);
+      border-radius: 1.25rem;
+      padding: 2.5rem;
+      border: 1px solid #e8ecf2;
+    }
+    .inscripcion-form h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      margin-bottom: 1.75rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #d1d9e6;
+      border-radius: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200,146,42,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .btn-form {
+      width: 100%;
+      background: #25d366;
+      color: white;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 0.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-form:hover { background: #128c7e; transform: translateY(-2px); }
+
+    /* FLOATING WHATSAPP */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      z-index: 999;
+      display: flex; align-items: center; gap: 0.75rem;
+      background: #25d366;
+      color: white;
+      padding: 0.85rem 1.5rem 0.85rem 1rem;
+      border-radius: 3rem;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse-wa 2.5s infinite;
+    }
+    .wa-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(37,211,102,0.5);
+      animation: none;
+    }
+    .wa-float svg { flex-shrink: 0; }
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 6px 32px rgba(37,211,102,0.7); }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .hero-grid, .about-grid, .info-grid { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid, .info-grid, .form-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
       .hero { padding-top: 6rem; }
+      .wa-float span { display: none; }
+      .wa-float { padding: 1rem; border-radius: 50%; }
     }
   </style>
 </head>
@@ -414,6 +562,8 @@
     <li><a href="#nosotros">Nosotros</a></li>
     <li><a href="#materias">Materias</a></li>
     <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#inscripcion">Inscripción</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
 </nav>
@@ -597,6 +747,137 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-tag">Dudas frecuentes</span>
+    <h2 class="section-title">Preguntas Frecuentes</h2>
+    <p class="section-sub">Todo lo que necesitas saber antes de comenzar.</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Las clases son en línea, presenciales o ambas?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-answer">Ofrecemos ambas modalidades. Puedes elegir la que mejor se adapte a tu situación. Las clases en línea se realizan por videollamada y son igual de efectivas que las presenciales.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuántas horas de clase necesito para el EGA-I?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-answer">Depende de tu nivel actual y el tiempo disponible. Lo ideal es comenzar con una evaluación diagnóstica para identificar tus áreas de oportunidad y armar un plan personalizado. Contáctanos y te asesoramos sin compromiso.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Las clases son individuales o grupales?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-answer">Principalmente trabajamos con clases individuales para garantizar atención personalizada. Si te interesa una opción grupal con amigos o compañeros, también podemos organizarlo. Consúltanos.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cómo se realizan los pagos?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-answer">El pago es por sesión o puedes pagar un paquete de horas. Aceptamos transferencia bancaria y efectivo. Los detalles exactos los coordinamos por WhatsApp al agendar.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Puedo cambiar o cancelar una clase agendada?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-answer">Sí, con previo aviso de al menos 12 horas puedes reagendar tu sesión sin ningún problema. Entendemos que los estudiantes tienen horarios cambiantes.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          ¿Cubren todo el temario del EGA-I / EGAV-I?
+          <span class="faq-arrow">▾</span>
+        </div>
+        <div class="faq-answer">Sí. Nuestro programa está diseñado para cubrir todas las áreas evaluadas en el Examen General de Admisión de la BUAP: matemáticas, física, química, razonamiento y comprensión lectora. También incluimos ejercicios y simulacros.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INSCRIPCION -->
+<section id="inscripcion">
+  <div class="container">
+    <div class="form-grid">
+      <div class="form-desc">
+        <span class="section-tag">¡Empieza hoy!</span>
+        <h2 class="section-title">Agenda tu primera clase</h2>
+        <p>Llena el formulario y te contactaremos por WhatsApp para confirmar tu horario y resolver cualquier duda. Es rápido y sin compromiso.</p>
+        <div class="form-steps">
+          <div class="form-step">
+            <div class="step-num">1</div>
+            <p><strong>Llena el formulario</strong> con tus datos y materia de interés.</p>
+          </div>
+          <div class="form-step">
+            <div class="step-num">2</div>
+            <p><strong>Te contactamos por WhatsApp</strong> para confirmar horario y modalidad.</p>
+          </div>
+          <div class="form-step">
+            <div class="step-num">3</div>
+            <p><strong>¡Inicia tu preparación!</strong> Comienza a avanzar hacia tu admisión a la BUAP.</p>
+          </div>
+        </div>
+      </div>
+      <div class="inscripcion-form">
+        <h3>📋 Formulario de Contacto</h3>
+        <div class="form-group">
+          <label>Nombre completo *</label>
+          <input type="text" id="f-nombre" placeholder="Tu nombre y apellido" />
+        </div>
+        <div class="form-group">
+          <label>Número de WhatsApp *</label>
+          <input type="tel" id="f-tel" placeholder="Ej. 2221234567" />
+        </div>
+        <div class="form-group">
+          <label>Materia de interés *</label>
+          <select id="f-materia">
+            <option value="">Selecciona una materia...</option>
+            <option>Aritmética y Álgebra</option>
+            <option>Geometría y Trigonometría</option>
+            <option>Funciones y Gráficas</option>
+            <option>Cálculo Diferencial</option>
+            <option>Física</option>
+            <option>Química</option>
+            <option>Estadística y Probabilidad</option>
+            <option>Razonamiento Matemático</option>
+            <option>Comprensión Lectora</option>
+            <option>Todas las materias (preparación completa EGA-I)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Modalidad preferida</label>
+          <select id="f-modalidad">
+            <option value="">Selecciona...</option>
+            <option>En línea</option>
+            <option>Presencial</option>
+            <option>Sin preferencia</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje adicional (opcional)</label>
+          <textarea id="f-mensaje" placeholder="¿Tienes alguna duda o comentario?"></textarea>
+        </div>
+        <button class="btn-form" onclick="enviarFormulario()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="container">
@@ -632,6 +913,45 @@
 <footer>
   <p>© 2025 <span>Centro de Regularización en Ciencias Exactas e Ingenierías</span> · Preparación EGA-I / EGAV-I BUAP</p>
 </footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/522222608204?text=Hola,%20me%20interesa%20información%20sobre%20las%20clases%20de%20regularización%20para%20el%20EGA-I%20BUAP" target="_blank" class="wa-float">
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>Escríbenos</span>
+</a>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function enviarFormulario() {
+    const nombre = document.getElementById('f-nombre').value.trim();
+    const tel = document.getElementById('f-tel').value.trim();
+    const materia = document.getElementById('f-materia').value;
+    const modalidad = document.getElementById('f-modalidad').value;
+    const mensaje = document.getElementById('f-mensaje').value.trim();
+
+    if (!nombre || !tel || !materia) {
+      alert('Por favor completa los campos obligatorios: nombre, teléfono y materia.');
+      return;
+    }
+
+    let texto = `Hola, me interesa agendar una clase de regularización 📚\n\n`;
+    texto += `*Nombre:* ${nombre}\n`;
+    texto += `*Teléfono:* ${tel}\n`;
+    texto += `*Materia:* ${materia}\n`;
+    if (modalidad) texto += `*Modalidad:* ${modalidad}\n`;
+    if (mensaje) texto += `*Comentario:* ${mensaje}\n`;
+    texto += `\n¿Podrían darme más información? ¡Gracias!`;
+
+    const url = `https://wa.me/522222608204?text=${encodeURIComponent(texto)}`;
+    window.open(url, '_blank');
+  }
+</script>
 
 </body>
 </html>
