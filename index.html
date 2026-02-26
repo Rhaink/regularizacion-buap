@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Centro de Regularización en Ciencias Exactas e Ingenierías</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --blue: #1a3a6b;
+      --accent: #c8922a;
+      --light: #f4f6fb;
+      --white: #ffffff;
+      --text: #2d3748;
+      --muted: #718096;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--light);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10, 22, 40, 0.97);
+      backdrop-filter: blur(10px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      border-bottom: 1px solid rgba(200,146,42,0.3);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--white);
+      font-size: 1.1rem;
+      line-height: 1.2;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 8rem 5% 4rem;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -50%; right: -20%;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(26,58,107,0.6) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--light));
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200,146,42,0.15);
+      border: 1px solid rgba(200,146,42,0.4);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: #b07e20; transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1rem;
+      padding: 1.5rem 2rem;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .stat-icon { font-size: 2rem; }
+    .stat-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--accent);
+    }
+    .stat-card p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
+    /* SECTIONS COMMONS */
+    section { padding: 6rem 5%; }
+    .section-tag {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 600px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ABOUT */
+    #nosotros { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+    .about-features { display: flex; flex-direction: column; gap: 1.5rem; }
+    .feature {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      border: 1px solid #e8ecf2;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .feature:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(200,146,42,0.1); }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .feature h4 { font-weight: 600; margin-bottom: 0.25rem; color: var(--navy); }
+    .feature p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+    .about-image {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image::before {
+      content: '∑';
+      position: absolute; top: -1rem; right: 1rem;
+      font-size: 12rem;
+      opacity: 0.06;
+      font-family: 'Playfair Display', serif;
+    }
+    .about-image h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .about-image p { color: rgba(255,255,255,0.7); line-height: 1.7; font-size: 0.95rem; }
+    .highlight-box {
+      margin-top: 1.5rem;
+      background: rgba(200,146,42,0.15);
+      border-left: 3px solid var(--accent);
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* MATERIAS */
+    #materias { background: var(--light); }
+    .materias-header { margin-bottom: 3rem; }
+    .materias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .materia-card {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      border: 1px solid #e8ecf2;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+    .materia-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(10,22,40,0.1);
+      border-color: var(--accent);
+    }
+    .materia-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .materia-card h4 { font-weight: 600; font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .materia-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+
+    /* HORARIOS Y PRECIOS */
+    #horarios { background: var(--white); }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .info-card {
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1px solid #e8ecf2;
+    }
+    .info-card-header {
+      background: var(--navy);
+      padding: 1.5rem 2rem;
+      color: white;
+    }
+    .info-card-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+    }
+    .info-card-body { padding: 2rem; }
+    .horario-row {
+      display: flex; justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f0f4f8;
+      font-size: 0.95rem;
+    }
+    .horario-row:last-child { border-bottom: none; }
+    .horario-row span:first-child { color: var(--muted); }
+    .horario-row span:last-child { font-weight: 600; color: var(--navy); }
+    .price-box {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .price-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .price-amount sup { font-size: 1.5rem; vertical-align: super; }
+    .price-unit { color: var(--muted); font-size: 0.9rem; margin-top: 0.5rem; }
+    .price-note {
+      margin-top: 1.5rem;
+      background: rgba(200,146,42,0.1);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      color: var(--navy);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .badge-open {
+      display: inline-block;
+      background: #dcfce7;
+      color: #16a34a;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+      margin-top: 0.5rem;
+    }
+
+    /* CONTACTO */
+    #contacto {
+      background: var(--navy);
+      text-align: center;
+    }
+    #contacto .section-title { color: var(--white); }
+    #contacto .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto 3rem; }
+    .contacto-cards {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contacto-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 1rem;
+      padding: 2rem 2.5rem;
+      text-decoration: none;
+      color: white;
+      transition: background 0.2s, transform 0.2s;
+      min-width: 220px;
+    }
+    .contacto-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); }
+    .contacto-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .contacto-card h4 { font-weight: 600; margin-bottom: 0.25rem; }
+    .contacto-card p { color: rgba(255,255,255,0.55); font-size: 0.85rem; }
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      background: #25d366;
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      margin-top: 2.5rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .whatsapp-btn:hover { background: #128c7e; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer {
+      background: #060f1e;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.85rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero-grid, .about-grid, .info-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hero { padding-top: 6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Centro de<br><span>Regularización</span> BUAP</div>
+  <ul class="nav-links">
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#materias">Materias</a></li>
+    <li><a href="#horarios">Horarios</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge">📐 Preparación EGA-I / EGAV-I BUAP</div>
+      <h1>Domina las <em>Ciencias Exactas</em> y logra tu admisión</h1>
+      <p>Centro especializado en preparación para el Examen General de Admisión de la BUAP. Refuerza matemáticas, física y más con asesoría personalizada.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/522222608204?text=Hola,%20me%20interesa%20información%20sobre%20las%20clases%20de%20regularización" target="_blank" class="btn-primary">📲 Contactar por WhatsApp</a>
+        <a href="#materias" class="btn-secondary">Ver materias</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-icon">🕘</div>
+        <div>
+          <h3>Lun – Dom</h3>
+          <p>9:00 AM a 8:00 PM · Todos los días</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <div>
+          <h3>$400</h3>
+          <p>por hora · Precio justo y accesible</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🎯</div>
+        <div>
+          <h3>EGA-I</h3>
+          <p>Preparación enfocada al examen de admisión BUAP</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="section-tag">¿Quiénes somos?</span>
+        <h2 class="section-title">Formación académica de alto nivel</h2>
+        <p class="section-sub">Institución dedicada al fortalecimiento de competencias en matemáticas, física y ciencias exactas para aspirantes y estudiantes de ingeniería.</p>
+        <div class="about-features" style="margin-top:2rem;">
+          <div class="feature">
+            <div class="feature-icon">🎓</div>
+            <div>
+              <h4>Asesoría personalizada</h4>
+              <p>Cada estudiante avanza a su ritmo con atención individualizada y seguimiento constante.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <div>
+              <h4>Enfocado al EGA-I / EGAV-I</h4>
+              <p>Temario alineado al examen oficial de admisión de la Benemérita Universidad Autónoma de Puebla.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">⏰</div>
+            <div>
+              <h4>Horarios flexibles</h4>
+              <p>Atención de lunes a domingo de 9 AM a 8 PM para que te organices sin complicaciones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-image">
+        <h3>Centro de Regularización en Ciencias Exactas e Ingenierías</h3>
+        <p>Nuestro programa se especializa en el fortalecimiento de competencias para que puedas superar el Examen General de Admisión de la BUAP con confianza y preparación sólida.</p>
+        <div class="highlight-box">
+          ✅ Preparación para el <strong>EGA-I</strong> y <strong>EGAV-I</strong> · Clases individuales y grupales · Ejercicios y simulacros incluidos
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIAS -->
+<section id="materias">
+  <div class="container">
+    <div class="materias-header">
+      <span class="section-tag">Temario completo</span>
+      <h2 class="section-title">Materias que cubrimos</h2>
+      <p class="section-sub">Abarcamos todas las áreas evaluadas en el Examen General de Admisión de la BUAP, desde fundamentos hasta temas avanzados.</p>
+    </div>
+    <div class="materias-grid">
+      <div class="materia-card">
+        <div class="materia-icon">➕</div>
+        <h4>Aritmética y Álgebra</h4>
+        <p>Operaciones, fracciones, potencias, raíces, ecuaciones lineales y cuadráticas, sistemas de ecuaciones.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">📐</div>
+        <h4>Geometría y Trigonometría</h4>
+        <p>Figuras planas, sólidos geométricos, teorema de Pitágoras, funciones trigonométricas, ley de senos y cosenos.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">📈</div>
+        <h4>Funciones y Gráficas</h4>
+        <p>Funciones lineales, cuadráticas, exponenciales, logarítmicas e interpretación de gráficas.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">∫</div>
+        <h4>Cálculo Diferencial</h4>
+        <p>Límites, derivadas, reglas de derivación, aplicaciones de la derivada y análisis de funciones.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">🔭</div>
+        <h4>Física</h4>
+        <p>Cinemática, dinámica, leyes de Newton, trabajo y energía, electricidad y magnetismo.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">⚗️</div>
+        <h4>Química</h4>
+        <p>Tabla periódica, enlace químico, estequiometría, reacciones químicas y balanceo de ecuaciones.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">📊</div>
+        <h4>Estadística y Probabilidad</h4>
+        <p>Medidas de tendencia central, dispersión, probabilidad básica y combinatoria.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">🧠</div>
+        <h4>Razonamiento Matemático</h4>
+        <p>Resolución de problemas, lógica, sucesiones numéricas y pensamiento analítico.</p>
+      </div>
+      <div class="materia-card">
+        <div class="materia-icon">📝</div>
+        <h4>Comprensión Lectora</h4>
+        <p>Análisis de textos, inferencias, vocabulario en contexto y redacción básica.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORARIOS Y PRECIOS -->
+<section id="horarios">
+  <div class="container">
+    <span class="section-tag">Disponibilidad</span>
+    <h2 class="section-title">Horarios y Precios</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-header">
+          <h3>🗓️ Horario de Atención</h3>
+          <div class="badge-open">● Abierto todos los días</div>
+        </div>
+        <div class="info-card-body">
+          <div class="horario-row"><span>Lunes</span><span>9:00 AM – 8:00 PM</span></div>
+          <div class="horario-row"><span>Martes</span><span>9:00 AM – 8:00 PM</span></div>
+          <div class="horario-row"><span>Miércoles</span><span>9:00 AM – 8:00 PM</span></div>
+          <div class="horario-row"><span>Jueves</span><span>9:00 AM – 8:00 PM</span></div>
+          <div class="horario-row"><span>Viernes</span><span>9:00 AM – 8:00 PM</span></div>
+          <div class="horario-row"><span>Sábado</span><span>9:00 AM – 8:00 PM</span></div>
+          <div class="horario-row"><span>Domingo</span><span>9:00 AM – 8:00 PM</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-header">
+          <h3>💳 Inversión</h3>
+        </div>
+        <div class="info-card-body">
+          <div class="price-box">
+            <div class="price-amount"><sup>$</sup>400</div>
+            <div class="price-unit">pesos mexicanos por hora de clase</div>
+          </div>
+          <div class="price-note">
+            📌 <strong>¿Cómo funciona?</strong><br>
+            Agenda tu sesión por WhatsApp, elige el horario que más te conviene y comienza a prepararte. Clases individuales con enfoque personalizado.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <span class="section-tag" style="color:var(--accent);">¿Listo para empezar?</span>
+    <h2 class="section-title">Contáctanos hoy</h2>
+    <p class="section-sub">Agenda tu primera sesión o resuelve cualquier duda. Estamos disponibles todos los días de 9 AM a 8 PM.</p>
+    <div style="text-align:center;">
+      <a href="https://wa.me/522222608204?text=Hola,%20me%20interesa%20información%20sobre%20las%20clases%20de%20regularización%20para%20el%20EGA-I%20BUAP" target="_blank" class="whatsapp-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </div>
+    <div class="contacto-cards" style="margin-top:3rem;">
+      <div class="contacto-card">
+        <div class="icon">📱</div>
+        <h4>WhatsApp</h4>
+        <p>(222) 260-8204</p>
+      </div>
+      <div class="contacto-card">
+        <div class="icon">🕘</div>
+        <h4>Horario</h4>
+        <p>Lun – Dom · 9 AM a 8 PM</p>
+      </div>
+      <div class="contacto-card">
+        <div class="icon">📍</div>
+        <h4>Modalidad</h4>
+        <p>Presencial y en línea</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Centro de Regularización en Ciencias Exactas e Ingenierías</span> · Preparación EGA-I / EGAV-I BUAP</p>
+</footer>
+
+</body>
+</html>
